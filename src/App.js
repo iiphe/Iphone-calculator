@@ -3,6 +3,7 @@ import './style.css';
 import { useState, useEffect } from 'react';
 import { NumericFormat } from 'react-number-format';
 
+//Set State for the calculator...
 function App() {
   const [previousState, setPreviousState] = useState('');
   const [currentState, setCurrentState] = useState('');
@@ -10,6 +11,7 @@ function App() {
   const [operator, setOperator] = useState(null);
   const [total, setTotal] = useState(false);
 
+  //Create functions to input numbers...
   const inputNum = (e) => {
     if (currentState.includes('.') && e.target.innerText === '.') return;
     if (total) {
@@ -30,15 +32,16 @@ function App() {
     setInput('0');
   }, []);
 
+  //Set function to calculate the operations
   const operatorType = (e) => {
     setTotal(false);
     setOperator(e.target.innerText);
     if (currentState === '') return;
     if (previousState !== '') {
       equals();
-    } else{
+    } else {
       setPreviousState(currentState);
-    setCurrentState('');
+      setCurrentState('');
     }
   };
 
@@ -83,11 +86,14 @@ function App() {
       : setCurrentState(String(parseFloat(currentState) / 100));
   };
 
+  //The reset button...
   const reset = () => {
     setPreviousState('');
     setCurrentState('');
     setInput('0');
   };
+
+  //Generate Buttons for the calculator...
   return (
     <div className="container">
       <div className="wrapper">
